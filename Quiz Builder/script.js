@@ -30,18 +30,26 @@ function createQuiz(event) {
     const option2 = document.getElementById('option2').value;
     const option3 = document.getElementById('option3').value;
     const option4 = document.getElementById('option4').value;
-    const correctAnswer = document.getElementById('correctAnswer').value;
+    const correctAnswerIndex = document.getElementById('correctAnswer').selectedIndex;
+
+    console.log('Question:', question);
+    console.log('Option 1:', option1);
+    console.log('Option 2:', option2);
+    console.log('Option 3:', option3);
+    console.log('Option 4:', option4);
+    console.log('Correct Answer Index:', correctAnswerIndex);
 
     const quizItem = {
         question,
         options: [option1, option2, option3, option4],
-        correctAnswer,
+        correctAnswerIndex,
     };
 
     quizQuestions.push(quizItem);
 
     document.getElementById('quizForm').reset();
 }
+
 
 function startQuiz() {
     if (quizQuestions.length === 0) {
@@ -76,28 +84,31 @@ function submitQuiz() {
         alert('Please select an answer.');
         return;
     }
-
-    userAnswers.push(Number(selectedAnswer.value));
+    const selectedAnswerIndex = Number(selectedAnswer.value);
+    const correctAnswerIndex = quizQuestions[currentQuestion].correctAnswerIndex;
+    if (selectedAnswerIndex === correctAnswerIndex) {
+        userAnswers.push(true);
+    } else {
+        userAnswers.push(false);
+    }
     currentQuestion++;
-
     if (currentQuestion < quizQuestions.length) {
         displayQuizQuestion();
     } else {
         showQuizResults();
     }
 }
-
 function showQuizResults() {
     let score = 0;
+
     for (let i = 0; i < quizQuestions.length; i++) {
-        if (userAnswers[i] === quizQuestions[i].options.indexOf(quizQuestions[i].correctAnswer)) {
+        if (userAnswers[i] === true) {
             score++;
         }
     }
 
     alert(`Your final score is ${score}/${quizQuestions.length}`);
 }
-
 function displayQuizList() {
     const quizList = document.getElementById('quizList');
     quizList.innerHTML = quizQuestions.map((quiz, index) => `

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Online Quiz Maker</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Online Quiz Maker</h1>
+        <div class="options">
+            <button onclick="showCreateQuiz()">Create Quiz</button>
+            <button onclick="showTakeQuiz()">Take Quiz</button>
+            <button onclick="showQuizListing()">Quiz Listing</button>
+        </div>
+        <div id="createQuiz" style="display: none;">
+            <h2>Create a Quiz</h2>
+            <form id="quizForm" onsubmit="createQuiz(event)">
+                <label for="question">Question:</label>
+                <input type="text" id="question" required>
+                <label for="option1">Option 1:</label>
+                <input type="text" id="option1" required>
+                <label for="option2">Option 2:</label>
+                <input type="text" id="option2" required>
+                <label for="option3">Option 3:</label>
+                <input type="text" id="option3" required>
+                <label for="option4">Option 4:</label>
+                <input type="text" id="option4" required>
+                <label for="correctAnswer">Correct Answer:</label>
+                <select id="correctAnswer" required>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                    <option value="option4">Option 4</option>
+                </select>
+                <button type="submit">Add Question</button>
+            </form>
+            <button onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+        <br><br>
+        <div id="takeQuiz" style="display: none;">
+            <h2>Take a Quiz</h2>
+            <div id="quizDisplay"></div>
+            <button onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+        <div id="quizListing" style="display: none;">
+            <h2>Quiz Listing</h2>
+            <ul id="quizList"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
